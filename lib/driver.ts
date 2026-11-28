@@ -16,7 +16,7 @@ const driverSession = cache(async () => {
 
   const phone = data.claims.phone;
   const lastFour = typeof phone === "string" ? phone.match(/[0-9]{4}$/)?.[0] : undefined;
-  return { kind: "driver" as const, supabase, profile, lastFour, userId: data.claims.sub };
+  return { kind: "driver" as const, supabase, profile, lastFour, userId: data.claims.sub, sessionId: data.claims.session_id };
 });
 
 export async function isSignedInDriver() {
@@ -27,9 +27,9 @@ export async function redirectSignedInDriver() {
   if (await isSignedInDriver()) redirect("/driver/dashboard");
 }
 
-export async function requireDriver() {
+export async function requireDriver(loginPath = "/driver/login") {
   const session = await driverSession();
-  if (session.kind === "guest") redirect("/driver/login");
+  if (session.kind === "guest") redirect(loginPath);
   if (session.kind === "other-account") redirect("/driver/login?notice=driver-required");
   if (session.kind === "unavailable") redirect("/driver/login?notice=unavailable");
   return session;

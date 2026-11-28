@@ -45,9 +45,10 @@ export default async function InterestedDrivers({
 
   const requestedPage = Number((await searchParams).page);
   const page = Number.isSafeInteger(requestedPage) && requestedPage >= 1 && requestedPage <= lastPage ? requestedPage : 1;
-  const { data, error } = await supabase.rpc("list_company_load_interest", {
-    requested_load_id: id, page_offset: (page - 1) * pageSize,
-  });
+  const [{ data, error }, { data: fee }] = await Promise.all([
+    supabase.rpc("list_company_load_interest", { requested_load_id: id, page_offset: (page - 1) * pageSize }),
+    supabase.rpc("current_platform_booking_fee"),
+  ]);
   const rows: DriverInterest[] = Array.isArray(data) ? data : [];
   const drivers = rows.slice(0, pageSize);
   const pageHref = (number: number) => `/company/loads/${id}/interest?page=${number}`;
@@ -94,7 +95,9 @@ export default async function InterestedDrivers({
               )}
               {driver.payment_reference && <p className="mt-1 break-words text-sm text-[#50645c]">Reference {driver.payment_reference}</p>}
               {driver.can_offer && driver.interest_id && typeof driver.requested_paise === "number" &&
-                <DriverSelection loadId={id} interestId={driver.interest_id} />}
+                (typeof fee === "number"
+                  ? <DriverSelection loadId={id} interestId={driver.interest_id} fee={formatFreight(fee)} />
+                  : <p className="mt-2 text-sm">New offers are unavailable until the platform booking fee is configured.</p>)}
               {driver.offer_status === "accepted" && driver.offer_id && typeof driver.amount_paise === "number" && (
                 <DriverPayout loadId={id} offerId={driver.offer_id} amount={driver.amount_paise}
                   advancePaid={driver.advance_paise} advanceReference={driver.advance_reference} source="load" />

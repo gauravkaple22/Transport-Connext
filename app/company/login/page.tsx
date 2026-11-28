@@ -6,6 +6,8 @@ import { CompanyForm } from "../company-form";
 import { emailField, passwordField } from "../fields";
 
 const notices = new Map([
+  ["account-created", "Your company account is ready. Log in with your work email and password."],
+  ["email-confirmed", "Your work email is confirmed. Log in to open your company dashboard."],
   ["check-email", "If registration is pending, check your work inbox for a confirmation link. If you already have an account, log in below."],
   ["password-updated", "Your password was updated. Log in with your new password."],
   ["signed-out", "You are logged out."],

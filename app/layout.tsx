@@ -17,8 +17,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="en">
       <body className="flex flex-col">
-        <header className="border-b border-[#dbe4dc] bg-white">
-          <nav aria-label="Main navigation" className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
+        <header className="border-b border-[#d4e1da] bg-[#f8fbf9]">
+          <nav aria-label="Main navigation" className="site-shell flex items-center justify-between gap-3 py-3">
             <Link href="/" className="flex items-center gap-2.5 font-extrabold tracking-tight sm:text-lg">
               <span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-xl bg-[#164e43] text-lg text-[#f9dc8a]">→</span>
               Transport Connect
@@ -35,9 +35,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             )}
           </nav>
         </header>
-        <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-8 sm:px-8 sm:py-12">{children}</main>
-        <footer className="border-t border-[#dbe4dc]">
-          <div className="mx-auto max-w-6xl px-5 py-5 text-sm text-[#50645c] sm:px-8">Transport Connect · Maharashtra, India</div>
+        <main className="site-shell flex-1 py-5 sm:py-7">{children}</main>
+        <footer className="border-t border-[#d4e1da] bg-[#e3ede8]">
+          <div className="site-shell py-3 text-sm text-[#435952]">Transport Connect · Maharashtra, India</div>
         </footer>
       </body>
     </html>

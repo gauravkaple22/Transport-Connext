@@ -99,3 +99,9 @@ export async function requireCompanyRecovery() {
 export function companyCallbackUrl(recovery = false) {
   return new URL(recovery ? "/company/auth/callback?flow=recovery" : "/company/auth/callback", process.env.APP_URL ?? "http://localhost:3000").toString();
 }
+
+export function companySignupCallbackUrl() {
+  const url = new URL(companyCallbackUrl());
+  url.searchParams.set("flow", "signup");
+  return url.toString();
+}

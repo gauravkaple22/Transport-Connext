@@ -32,6 +32,7 @@ export const config = {
     "/driver/login",
     "/driver/signup",
     "/driver/forgot-password",
+    "/driver/reset-password",
     "/driver/profile",
     "/driver/loads",
     "/driver/offers",

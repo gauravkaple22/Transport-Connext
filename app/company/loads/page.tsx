@@ -25,7 +25,7 @@ export default async function CompanyLoads({
   const statusMessage = notice === "posted" ? "Load posted." : notice === "closed" ? "Load closed." : null;
 
   return (
-    <section className="mx-auto max-w-5xl">
+    <section className="w-full">
       <Link href="/company/dashboard" className="text-link text-sm">Company dashboard</Link>
       <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
         <div>

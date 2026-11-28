@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 body {
-  @apply min-h-screen bg-[#f7f6f0] text-[#152e29] antialiased;
+  @apply min-h-screen bg-[#eaf1ee] text-[#152e29] antialiased;
+  background-image: linear-gradient(155deg, #dfece6 0%, #edf3ef 48%, #edf1f4 100%);
   font-family: "Segoe UI", Arial, sans-serif;
 }
 :focus-visible { @apply outline-2 outline-offset-4 outline-teal-700; }
@@ -15,7 +16,8 @@ body {
 .button { @apply bg-[#164e43] text-white hover:bg-[#0e3b32] disabled:cursor-wait disabled:opacity-65; }
 .button-outline { @apply border border-[#bfcfc6] bg-white text-[#164e43] hover:bg-[#edf4ef]; }
 .text-link { @apply font-semibold text-[#164e43] underline decoration-[#7eaa9b] underline-offset-4; }
-.panel { @apply rounded-3xl border border-[#dbe4dc] bg-white shadow-[0_8px_30px_#193e2910]; }
+.site-shell { @apply mx-auto w-full max-w-[90rem] px-4 sm:px-6 xl:px-8; }
+.panel { @apply rounded-2xl border border-[#d4e1da] bg-white shadow-[0_3px_16px_#193e290b]; }
 
 .field-error { @apply font-normal text-rose-800; }
 .field :is(input, select, textarea)[aria-invalid="true"] { @apply border-rose-700; }

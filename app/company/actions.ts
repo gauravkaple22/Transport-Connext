@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { createSupabase } from "../../lib/supabase";
 import { companyEmailInput, formValue, readCompanyProfile, validCompanyEmail } from "../../lib/company-profile";
 import {
-  beginCompanyRecovery, clearCompanyRecovery, companyCallbackUrl, companyLoginDestination,
+  beginCompanyRecovery, clearCompanyRecovery, companyCallbackUrl, companyLoginDestination, companySignupCallbackUrl,
   getCompanyProfile, redirectSignedInCompany, requireCompany, requireCompanyRecovery,
 } from "../../lib/company";
 import type { CompanyFormState } from "./company-form";
@@ -47,7 +47,7 @@ export async function registerCompany(_: CompanyFormState, form: FormData): Prom
   const { data, error } = await supabase.auth.signUp({
     email,
     password: formValue(form, "password"),
-    options: { emailRedirectTo: companyCallbackUrl(), data: { signup_type: "company", ...profile } },
+    options: { emailRedirectTo: companySignupCallbackUrl(), data: { signup_type: "company", ...profile } },
   });
   if (error?.status === 429) return { message: "Too many attempts. Wait a few minutes and try again." };
   if (error?.code === "weak_password") return { fields: { password: "Choose a stronger password and try again." } };
@@ -59,7 +59,9 @@ export async function registerCompany(_: CompanyFormState, form: FormData): Prom
 
   const issue = await companySession(supabase, data.user.id);
   if (issue) return issue;
-  redirect("/company/dashboard");
+  const { error: logoutError } = await supabase.auth.signOut({ scope: "local" });
+  if (logoutError) return { message: "Your account was created. Open your dashboard and log out before signing in again." };
+  redirect("/company/login?notice=account-created");
 }
 
 export async function loginCompany(next: string | undefined, _: CompanyFormState, form: FormData): Promise<CompanyFormState> {

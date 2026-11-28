@@ -3,7 +3,7 @@
 import { useEffect, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
-export function AutoRefresh() {
+export function AutoRefresh({ intervalMs = 20000 }: { intervalMs?: number } = {}) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
 
@@ -14,13 +14,15 @@ export function AutoRefresh() {
       }
     };
 
-    const tick = window.setInterval(refresh, 20000);
+    const tick = window.setInterval(refresh, intervalMs);
     document.addEventListener("visibilitychange", refresh);
+    window.addEventListener("online", refresh);
     return () => {
       window.clearInterval(tick);
       document.removeEventListener("visibilitychange", refresh);
+      window.removeEventListener("online", refresh);
     };
-  }, [pending, router, startTransition]);
+  }, [intervalMs, pending, router, startTransition]);
 
   return null;
 }

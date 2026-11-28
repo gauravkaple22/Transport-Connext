@@ -50,7 +50,7 @@ export function CommissionList({ records, page, path, error, renderAction, pageH
                 </div>
                 <dl className="mt-4 grid gap-3 rounded-xl bg-stone-50 p-4 text-sm sm:grid-cols-3">
                   <div><dt className="font-semibold">Driver receives</dt><dd className="mt-1">{formatFreight(record.agreed_paise)}</dd></div>
-                  <div><dt className="font-semibold">Company commission (4%)</dt><dd className="mt-1">{formatFreight(record.commission_paise)}</dd></div>
+                  <div><dt className="font-semibold">Company platform fee</dt><dd className="mt-1">{formatFreight(record.commission_paise)}</dd></div>
                   <div><dt className="font-semibold">Company total</dt><dd className="mt-1 font-bold">{formatFreight(record.total_paise)}</dd></div>
                 </dl>
                 {record.payment_reference && <p className="mt-3 break-all text-sm">Platform payment reference: {record.payment_reference}</p>}

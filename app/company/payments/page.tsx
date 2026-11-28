@@ -43,7 +43,7 @@ export default async function CompanyPayments({ searchParams }: { searchParams: 
       accountAction={<form action={logoutCompany}><SubmitButton label="Log out" pendingLabel="Logging out…" variant="outline" /></form>}>
       <AutoRefresh />
       <WorkspaceHeading label="Company payments" title="Trip payments"
-        description="Pay the driver the full agreed amount. The 4% platform commission is a separate company payment." />
+        description="Pay the driver the full agreed amount. The platform booking fee is a separate company payment." />
       {params.notice === "recorded" && <p role="status" className="rounded-xl bg-[#edf4ef] p-4 text-sm font-semibold">Payment recorded.</p>}
       <nav className="flex flex-wrap gap-3" aria-label="Payment status">
         <Link href="/company/payments" aria-current={!recorded ? "page" : undefined} className={!recorded ? "button" : "button-outline"}>Payments due</Link>
@@ -69,7 +69,7 @@ export default async function CompanyPayments({ searchParams }: { searchParams: 
                 </div>
                 {typeof payment.commission_paise === "number" && typeof payment.total_paise === "number" && (
                   <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 rounded-xl bg-stone-50 p-3 text-sm">
-                    <span>Company commission (4%) <strong>{formatFreight(payment.commission_paise)}</strong></span>
+                    <span>Company platform fee <strong>{formatFreight(payment.commission_paise)}</strong></span>
                     <span>Company total <strong>{formatFreight(payment.total_paise)}</strong></span>
                   </div>
                 )}

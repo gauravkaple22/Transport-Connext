@@ -60,7 +60,7 @@ export default async function DriverLoads({
   }
 
   return (
-    <section className="mx-auto max-w-5xl">
+    <section className="w-full">
       <div className="flex flex-wrap gap-5">
         <Link href="/driver/dashboard" className="text-link inline-block py-2 text-sm">Back to dashboard</Link>
         <Link href="/driver/offers" className="text-link inline-block py-2 text-sm">My offers</Link>

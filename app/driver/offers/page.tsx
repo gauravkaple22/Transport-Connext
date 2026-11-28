@@ -30,7 +30,7 @@ export default async function DriverOffers({ searchParams }: { searchParams: Pro
   const rows: Offer[] = Array.isArray(data) ? data : [];
 
   return (
-    <section className="mx-auto max-w-5xl">
+    <section className="w-full">
       <AutoRefresh />
       <Link href="/driver/dashboard" className="text-link inline-block py-2 text-sm">Back to dashboard</Link>
       <h1 className="mt-2 text-4xl font-extrabold tracking-tight">My offers</h1>

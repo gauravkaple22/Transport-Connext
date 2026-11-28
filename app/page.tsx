@@ -25,7 +25,7 @@ const guides = [
       ["Post your load", "Add pickup and delivery addresses, loading date, goods details, truck type and body length, and your expected payment range. Include cargo weight and the required delivery date in the instructions."],
       ["Confirm a driver and price", "Review requests, vehicle numbers, and requested amounts. Send an offer to a suitable driver and confirm the final price and terms together."],
       ["Pay the advance and dispatch", "Record the 70% advance paid to the driver before dispatch. Mark the trip dispatched when the truck leaves and follow the map when the driver shares their location."],
-      ["Close out the trip", "Confirm receipt of the goods and complete the remaining driver payment. Pay the separate 4% commission to Transport Connect and record it in the company workspace."],
+      ["Close out the trip", "Confirm receipt of the goods and complete the remaining driver payment. Pay the separate booking fee to Transport Connect and record it in the company workspace."],
     ],
     responsibilities: "Provide accurate load details, coordinate pickup and delivery, and pay the driver and the platform as agreed.",
   },
@@ -39,20 +39,13 @@ const rules = [
   "Avoid misleading information and fraudulent bookings. Report suspicious activity or disputes to platform support.",
 ];
 
-const fees = [
-  ["Confirmed load price / driver receives", "₹10,000"],
-  ["Company platform commission (4%)", "₹400"],
-  ["Driver platform commission", "₹0"],
-  ["Total company pays", "₹10,400"],
-];
-
 export default async function Home() {
   const role = await signedInAccountRole();
 
   return (
-    <div className="grid gap-8 sm:gap-10">
-      <section className="grid overflow-hidden rounded-[1.75rem] bg-[#123b33] text-white md:min-h-[25rem] md:grid-cols-[1.2fr_1fr]">
-        <div className="flex flex-col items-start justify-center px-6 py-10 sm:px-10 lg:px-12">
+    <div className="grid gap-5 sm:gap-6">
+      <section className="grid overflow-hidden rounded-[1.75rem] bg-[#123b33] text-white md:min-h-[20rem] md:grid-cols-[1.2fr_1fr]">
+        <div className="flex flex-col items-start justify-center px-5 py-7 sm:px-8 lg:px-10">
           <p className="text-sm font-semibold text-[#f9dc8a]">Serving Maharashtra</p>
           <h1 className="mt-4 text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl">Find a load. Find a driver.</h1>
           <p className="mt-5 max-w-md leading-relaxed text-[#d8e8e1]">
@@ -63,9 +56,9 @@ export default async function Home() {
             <a href="#company" className="button-outline">Company guide</a>
           </nav>
         </div>
-        <div className="relative min-h-48 md:min-h-full">
+        <div className="relative min-h-36 md:min-h-full">
           <Image src="/sahyadri-truck.webp" alt="Cargo truck on a highway through the Sahyadri hills" fill preload
-            sizes="(max-width: 767px) 100vw, 480px" className="object-cover object-[58%_center]" />
+            sizes="(max-width: 767px) 100vw, 42vw" className="object-cover object-[58%_center]" />
         </div>
       </section>
 
@@ -85,7 +78,7 @@ export default async function Home() {
                 </>
               )}
               <a href="#commission" className="rounded-full bg-[#edf4ef] px-3 py-2 text-sm font-bold text-[#164e43] hover:underline">
-                {guide.id === "driver" ? "0% driver commission" : "4% company commission"}
+                {guide.id === "driver" ? "Driver platform fee: ₹0" : "Fixed company booking fee"}
               </a>
             </div>
             <div className="mt-5 rounded-2xl bg-[#edf4ef] px-4 py-3">
@@ -111,25 +104,15 @@ export default async function Home() {
         <div>
           <h2 id="commission-title" className="text-2xl font-extrabold tracking-tight sm:text-3xl">Platform commission</h2>
           <p className="mt-3 leading-relaxed text-[#50645c]">
-            Companies and loaders pay Transport Connect 4% of the load price confirmed by both parties. The fee is added to the company total. Drivers pay 0% commission and receive the full agreed load price.
+            Companies and loaders pay one fixed platform fee for each new confirmed booking. The company sees the fee before sending an offer. Drivers pay ₹0 in platform fees and receive the full agreed amount directly from the company.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-[#50645c]">
-            If both parties agree to change the confirmed price, record the revised price and recalculate the commission under the platform policy.
+            The fixed fee stays the same if the company and driver agree to a different transport price.
           </p>
         </div>
         <div className="rounded-2xl bg-[#edf4ef] p-4 sm:p-5">
-          <table className="w-full text-sm">
-            <caption className="mb-2 text-left text-base font-bold">Example for a ₹10,000 load</caption>
-            <tbody className="divide-y divide-[#cfdbd2]">
-              {fees.map(([label, amount]) => (
-                <tr key={label} className="last:font-bold">
-                  <th scope="row" className="py-2 pr-3 text-left font-[inherit]">{label}</th>
-                  <td className="text-right tabular-nums">{amount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="mt-3 text-sm text-[#50645c]">For a ₹25,000 load, the company platform fee is ₹1,000.</p>
+          <h3 className="text-base font-bold">How payments work</h3>
+          <p className="mt-2 text-sm text-[#50645c]">Pay the driver directly. Pay the booking fee separately under Company Payments, then submit the transaction reference for admin verification.</p>
         </div>
       </section>
 

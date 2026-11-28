@@ -18,6 +18,10 @@ export async function GET(request: NextRequest) {
           }
           return NextResponse.redirect(new URL("/company/forgot-password", base));
         }
+        if (request.nextUrl.searchParams.get("flow") === "signup") {
+          const { error: logoutError } = await supabase.auth.signOut({ scope: "local" });
+          if (!logoutError) return NextResponse.redirect(new URL("/company/login?notice=email-confirmed", base));
+        }
         return NextResponse.redirect(new URL("/company/dashboard", base));
       }
       await supabase.auth.signOut({ scope: "local" });

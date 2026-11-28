@@ -8,6 +8,8 @@ export default async function Login({ searchParams }: { searchParams: DriverSear
   await redirectSignedInDriver();
   const { notice } = await searchParams;
   const message = notice === "signed-out" ? "You are logged out." :
+    notice === "account-created" ? "Your driver account is ready. Log in with your mobile number and password." :
+    notice === "password-updated" ? "Password updated. Log in with your mobile number and new password." :
     notice === "driver-required" ? "Use a driver account to log in here." :
     notice === "unavailable" ? "Driver login is temporarily unavailable. Try again later." : null;
 

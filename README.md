@@ -2,7 +2,7 @@
 
 Transport Connect is a platform in development for transport companies and truck drivers, starting in Maharashtra. The home page links to `/login`, where visitors choose Driver or Company. Company accounts use email and password.
 
-Drivers sign up with their full name, Indian mobile number and password. Supabase Auth stores the mobile number on the auth user record. The driver profile table stores the name and user ID, and the protected dashboard requires that profile. The dashboard shows only the last four digits when the authenticated session contains the number. The driver flow uses neither email nor SMS. Self-service password recovery is currently unavailable for phone-only accounts because no recovery channel is configured.
+Drivers sign up with their full name, Indian mobile number and password. Supabase Auth stores the mobile number on the auth user record. The driver profile table stores the name and user ID, and the protected dashboard requires that profile. The dashboard shows only the last four digits when the authenticated session contains the number. Drivers can add an optional verified recovery email in My profile. Login uses the mobile number and password, and recovery sends an email link.
 
 ## Run locally
 
@@ -13,7 +13,7 @@ Use Node.js 22.19 or a newer supported release. The app uses the operating syste
 1. If needed, copy `.env.example` to `.env.local`. Use the project's URL and publishable key from the Supabase **Connect** dialog.
 2. Coordinate with the company developer. In Supabase **SQL Editor**, run the migration files in order. If the initial driver profile migration is already applied, run only the newer phone signup migration.
 3. Under **Authentication > Sign In / Providers > Phone**, enable the Phone provider and leave **Confirm phone** off. Phone-and-password signup works without an SMS provider when phone confirmation is off. Keep the project's Email provider and its confirmation settings available for the company flow.
-4. The driver flow does not use email callback redirects. Keep any redirects required by the company flow.
+4. For driver recovery, allow `http://localhost:3000/driver/auth/callback` under **Authentication > URL Configuration > Redirect URLs** and add the equivalent HTTPS URL for deployment. Match `APP_URL` to the exact browser origin, including the port. Use custom SMTP for delivery to users outside the project team.
 
 Existing driver profiles are preserved by the migration. If anyone created an email-only driver account in the earlier prototype, coordinate a verified account transition before they rely on this phone-only login.
 

@@ -28,8 +28,8 @@ export function Workspace({ role, current, heading, children, accountAction }: {
 }) {
   const sidebarTitle = role === "company" ? "Company workspace" : "Driver workspace";
   return (
-    <div className="grid items-start gap-5 lg:grid-cols-[14rem_minmax(0,1fr)]">
-      <aside className="panel p-4 lg:sticky lg:top-5">
+    <div className="grid items-start gap-4 lg:grid-cols-[13rem_minmax(0,1fr)] xl:gap-5">
+      <aside className="panel p-3 lg:sticky lg:top-5">
         <p className="px-3 pt-1 text-sm font-bold">{sidebarTitle}</p>
         <nav aria-label={sidebarTitle} className="mt-3 grid grid-cols-2 gap-1 sm:grid-cols-4 lg:grid-cols-1">
           {links[role].map(([href, label]) => (
@@ -41,7 +41,7 @@ export function Workspace({ role, current, heading, children, accountAction }: {
         </nav>
         <div className="mt-3 border-t border-[#dbe4dc] pt-3">{accountAction}</div>
       </aside>
-      <section aria-label={heading} className="grid min-w-0 gap-5">{children}</section>
+      <section aria-label={heading} className="grid min-w-0 gap-4">{children}</section>
     </div>
   );
 }
@@ -50,11 +50,11 @@ export function WorkspaceHeading({ label, title, description, action }: {
   label: string; title: string; description: string; action?: ReactNode;
 }) {
   return (
-    <div className="flex flex-wrap items-end justify-between gap-5 rounded-3xl bg-[#123b33] p-6 text-white sm:p-8">
+    <div className="flex flex-wrap items-end justify-between gap-4 rounded-2xl bg-[#123b33] p-5 text-white sm:px-6">
       <div className="min-w-0">
         <p className="text-sm font-semibold text-[#f9dc8a]">{label}</p>
         <h1 className="mt-2 break-words text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h1>
-        <p className="mt-3 text-sm leading-relaxed text-[#d8e8e1] sm:text-base">{description}</p>
+        <p className="mt-2 text-sm leading-relaxed text-[#d8e8e1] sm:text-base">{description}</p>
       </div>
       {action}
     </div>

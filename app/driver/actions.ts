@@ -56,7 +56,9 @@ export async function signUp(_: DriverFormState, form: FormData): Promise<Driver
     await supabase.auth.signOut({ scope: "local" });
     return { message: "We couldn't open your driver profile. Try logging in again shortly." };
   }
-  redirect("/driver/dashboard");
+  const { error: logoutError } = await supabase.auth.signOut({ scope: "local" });
+  if (logoutError) return { message: "Your account was created. Open your dashboard and log out before signing in again." };
+  feedback("login", "account-created");
 }
 
 export async function signIn(_: DriverFormState, form: FormData): Promise<DriverFormState> {
